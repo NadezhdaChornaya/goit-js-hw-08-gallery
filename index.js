@@ -25,6 +25,38 @@ let createMarkupGallery = galleryItems.reduce((acc, galleryItem) => {
 
 refs.gallery.insertAdjacentHTML("afterbegin", createMarkupGallery);
 
+// ======================= делегирование на галерее ==========================
+const onImageClick = function (e) {
+    e.preventDefault();
+    if (e.target.nodeName !== "IMG") { return; }
+    console.log(e.target.dataset.source);
+}
+
+refs.gallery.addEventListener("click", onImageClick);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
