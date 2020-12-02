@@ -1,11 +1,15 @@
 import galleryItems from "./gallery-items.js";
 
 const refs = {
-    gallery: document.querySelector(".gallery"),
+  gallery: document.querySelector(".gallery"),
+  closeModalBtn: document.querySelector("button[data-action='close - lightbox']"),
+  modalWindow: document.querySelector("div.lightbox"),
 };
 
+
+// ==============================================================================
 let createMarkupGallery = galleryItems.reduce((acc, galleryItem) => {
-    let amarkupGallery = `<li class="gallery__item">
+  let amarkupGallery = `<li class="gallery__item">
   <a
     class="gallery__link"
     href="${galleryItem.original}"
@@ -18,26 +22,33 @@ let createMarkupGallery = galleryItems.reduce((acc, galleryItem) => {
     />
   </a>
 </li>`
-    return acc += amarkupGallery;
+  return acc += amarkupGallery;
 
 }, "")
 
 
 refs.gallery.insertAdjacentHTML("afterbegin", createMarkupGallery);
 
-// ======================= делегирование на галерее ==========================
+// ======================= делегирование на галерее и открытие модалки ==========================
 const onImageClick = function (e) {
-    e.preventDefault();
-    if (e.target.nodeName !== "IMG") { return; }
-    console.log(e.target.dataset.source);
+  e.preventDefault();
+  if (e.target.nodeName !== "IMG") { return; }
+  console.log(e.target.dataset.source);
+  refs.modalWindow.classList.add("is-open");
 }
 
 refs.gallery.addEventListener("click", onImageClick);
+// =============================== Подмена значения атрибута src элемента img.lightbox__image. ==============================
 
 
 
+// ================================ закрытие кнопки ============================================
 
-
+// refs.closeModalBtn = document.querySelector("button[data-action='close - lightbox']");
+// const onCloseModal = () => {
+//   document.body.classList.remove("")
+// };
+// closeModalBtn.addEventListener("click", onCloseModal);
 
 
 
