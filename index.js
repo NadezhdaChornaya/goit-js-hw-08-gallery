@@ -4,6 +4,7 @@ const refs = {
   gallery: document.querySelector(".gallery"),
   closeModalBtn: document.querySelector("button[data-action='close - lightbox']"),
   modalWindow: document.querySelector("div.lightbox"),
+  img: document.querySelector(".lightbox__image"),
 };
 
 
@@ -35,21 +36,21 @@ const onImageClick = function (e) {
   if (e.target.nodeName !== "IMG") { return; }
   console.log(e.target.dataset.source);
   refs.modalWindow.classList.add("is-open");
+  // gодмена значения атрибута src элемента img.lightbox__image.
+  refs.img.alt = e.target.alt;
+  refs.img.src = e.target.dataset.source;
+  // refs.closeModalBtn.classList.add("is-open");
 }
-
-refs.gallery.addEventListener("click", onImageClick);
-// =============================== Подмена значения атрибута src элемента img.lightbox__image. ==============================
-
 
 
 // ================================ закрытие кнопки ============================================
-
-// refs.closeModalBtn = document.querySelector("button[data-action='close - lightbox']");
-// const onCloseModal = () => {
-//   document.body.classList.remove("")
-// };
-// closeModalBtn.addEventListener("click", onCloseModal);
-
+const onCloseButton = function () {
+  refs.modalWindow.classList.remove("is-open");
+  refs.img.src = "";
+  refs.img.alt = "";
+}
+refs.gallery.addEventListener("click", onImageClick);
+refs.modalWindow.addEventListener("click", onCloseButton);
 
 
 
